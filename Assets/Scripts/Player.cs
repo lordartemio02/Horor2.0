@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-<<<<<<< HEAD
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour
@@ -97,21 +96,8 @@ public class Player : MonoBehaviour
                 if (RayToScan())
                 {
 
-                }  
+                }
             }
         }
-=======
-
-public class Player : MonoBehaviour
-{
-
-    [SerializeField]private GameObject objPlayer;
-
-    public Transform posPlayer;
-    private void FixedUpdate()
-    {
-        posPlayer = objPlayer.transform;
-        Debug.Log(posPlayer);
->>>>>>> Yuriy
     }
 }
