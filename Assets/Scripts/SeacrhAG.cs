@@ -5,6 +5,7 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 public class SeacrhAG : MonoBehaviour
 {
+<<<<<<< HEAD
     public LayerMask LayerMask;
     public int rays = 6;
     public Vector3 OffSet;
@@ -22,6 +23,21 @@ public class SeacrhAG : MonoBehaviour
     private void Start()
     {
         targetPlayer = GameObject.FindGameObjectWithTag(TargetTagPlayer).transform;
+=======
+    [SerializeField]private GameObject rayCastAgent;
+    public LayerMask LayerMask;
+    public int rays = 6;
+    public Vector3 OffSet;
+    private Transform target;
+    public string TargetTag = "Player";
+    public float Angle = 20;
+    private AICharacterControl characterControlAI;
+
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag(TargetTag).transform;
+        
+>>>>>>> Yuriy
     }
 
     private void Awake()
@@ -35,7 +51,11 @@ public class SeacrhAG : MonoBehaviour
         Vector3 pos = transform.position + OffSet;
         if (Physics.Raycast(pos, dir, out hit, Mathf.Infinity))
         {
+<<<<<<< HEAD
             if (hit.transform == targetPlayer)
+=======
+            if (hit.transform == target)
+>>>>>>> Yuriy
             {
                 result = true;
                 Debug.DrawLine(pos, hit.point, Color.green);
@@ -49,6 +69,7 @@ public class SeacrhAG : MonoBehaviour
         {
             Debug.DrawRay(pos, dir * Mathf.Infinity, Color.red);
         }
+<<<<<<< HEAD
         //if (Physics.Raycast(pos, dir, out hit, distance))
         //{
         //    Debug.Log("hello");
@@ -64,6 +85,8 @@ public class SeacrhAG : MonoBehaviour
         //        Debug.Log("hello2");
         //    }
         //}
+=======
+>>>>>>> Yuriy
         return result;
     }
     public bool FoundPlayer()
@@ -92,6 +115,7 @@ public class SeacrhAG : MonoBehaviour
         if (a || b) result = true;
         return result;
     }
+<<<<<<< HEAD
     public bool HeardPlayer()
     {
         bool result = false;
@@ -158,4 +182,6 @@ public class SeacrhAG : MonoBehaviour
         }
         return result;
     }
+=======
+>>>>>>> Yuriy
 }

@@ -53,10 +53,18 @@ public class Brain : MonoBehaviour
 
     private void FixedUpdate()
     {
+<<<<<<< HEAD
         if (seacrhAG.FoundPlayer() == true || seacrhAG.HeardPlayer() == true)
         {
             state = FlagState.FoundPlayer;
             playerPoint.position = player.position;
+=======
+        if (seacrhAG.FoundPlayer() == true)
+        {
+            state = FlagState.FoundPlayer;
+            playerPoint.position = player.position;
+            Debug.Log("YA TEBYA YBIY");
+>>>>>>> Yuriy
             targetPoint = playerPoint;
             characterControlAI.SetTarget(playerPoint);
         }

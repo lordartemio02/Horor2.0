@@ -43,11 +43,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+<<<<<<< HEAD
         public bool BlockControll = false;
         public bool PlayerRuning = false;
         public bool PlayerStands = true;
 
 
+=======
+>>>>>>> Yuriy
         // Use this for initialization
         private void Start()
         {
@@ -67,6 +70,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+<<<<<<< HEAD
             PlayerRuning = m_IsWalking;
             OnBlockPlayerController();
             OffBlockPlayerController();
@@ -94,6 +98,28 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_PreviouslyGrounded = m_CharacterController.isGrounded;
 
             }
+=======
+            RotateView();
+            // the jump state needs to read here to make sure it is not missed
+            if (!m_Jump)
+            {
+                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+            }
+
+            if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
+            {
+                StartCoroutine(m_JumpBob.DoBobCycle());
+                PlayLandingSound();
+                m_MoveDir.y = 0f;
+                m_Jumping = false;
+            }
+            if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
+            {
+                m_MoveDir.y = 0f;
+            }
+
+            m_PreviouslyGrounded = m_CharacterController.isGrounded;
+>>>>>>> Yuriy
         }
 
 
@@ -121,6 +147,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
 
+<<<<<<< HEAD
             if (BlockControll == false)
             {
                 if (m_CharacterController.isGrounded)
@@ -145,6 +172,31 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 m_MouseLook.UpdateCursorLock();
             }
+=======
+
+            if (m_CharacterController.isGrounded)
+            {
+                m_MoveDir.y = -m_StickToGroundForce;
+
+                if (m_Jump)
+                {
+                    m_MoveDir.y = m_JumpSpeed;
+                    PlayJumpSound();
+                    m_Jump = false;
+                    m_Jumping = true;
+                }
+            }
+            else
+            {
+                m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
+            }
+            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
+
+            ProgressStepCycle(speed);
+            UpdateCameraPosition(speed);
+
+            m_MouseLook.UpdateCursorLock();
+>>>>>>> Yuriy
         }
 
 
@@ -159,7 +211,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
             {
+<<<<<<< HEAD
                 
+=======
+>>>>>>> Yuriy
                 m_StepCycle += (m_CharacterController.velocity.magnitude + (speed*(m_IsWalking ? 1f : m_RunstepLenghten)))*
                              Time.fixedDeltaTime;
             }
@@ -170,6 +225,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_NextStep = m_StepCycle + m_StepInterval;
+<<<<<<< HEAD
+=======
+
+>>>>>>> Yuriy
             PlayFootStepAudio();
         }
 
@@ -198,7 +257,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> Yuriy
             if (m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded)
             {
                 m_Camera.transform.localPosition =
@@ -238,12 +300,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_Input.Normalize();
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> Yuriy
             // handle speed change to give an fov kick
             // only if the player is going to a run, is running and the fovkick is to be used
             if (m_IsWalking != waswalking && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
             {
                 StopAllCoroutines();
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
+<<<<<<< HEAD
 
             }
             if (horizontal == 0 || vertical == 0)
@@ -253,13 +320,19 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
             {
                 PlayerStands = false;
+=======
+>>>>>>> Yuriy
             }
         }
 
 
         private void RotateView()
         {
+<<<<<<< HEAD
             m_MouseLook.LookRotation(transform, m_Camera.transform);
+=======
+            m_MouseLook.LookRotation (transform, m_Camera.transform);
+>>>>>>> Yuriy
         }
 
 
@@ -278,6 +351,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             body.AddForceAtPosition(m_CharacterController.velocity*0.1f, hit.point, ForceMode.Impulse);
         }
+<<<<<<< HEAD
         public void OnBlockPlayerController()
         {
             if (Input.GetKeyDown(KeyCode.L))
@@ -293,5 +367,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 BlockControll = false;
             }
         }
+=======
+>>>>>>> Yuriy
     }
 }
